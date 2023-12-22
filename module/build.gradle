@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+
+// Just for publish to local. jitpack.io do not use the following configurations, it just user github user domain & git repository name & git tag informations
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                // from components.release
+                from components.findByName('release')
+                // groupId, artifactId, version
+                groupId = 'com.github.SnowGirls'
+                artifactId = 'Xlightweight-Store-Android'
+                version = '0.0.1'
+            }
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                // from components.debug
+                from components.findByName('debug')
+                // groupId, artifactId, version
+                groupId = 'com.github.SnowGirls'
+                artifactId = 'Xlightweight-Store-Android'
+                version = '0.0.1'
+            }
+        }
+    }
+}
+
+android {
+    namespace 'com.tesla.modules.store'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 24
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    publishing {
+        singleVariant("release")
+        singleVariant("debug")
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+
+    api 'androidx.annotation:annotation:1.2.0'
+}
