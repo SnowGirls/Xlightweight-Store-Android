@@ -10,6 +10,7 @@ create a [jitpack.yml](jitpack.yml) specified a jdk version, push the tag is ok 
 the go to [jitpack.io](https://jitpack.io) and click `Look up` button to gererate the `aar`
 
     ````
+    env JAVA_HOME=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/ ./gradlew tasks
     env JAVA_HOME=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/  ./gradlew task --all
     env JAVA_HOME=$HOME/Library/Java/JavaVirtualMachines/openjdk-18.0.2/Contents/Home  ./gradlew task --all
     ````

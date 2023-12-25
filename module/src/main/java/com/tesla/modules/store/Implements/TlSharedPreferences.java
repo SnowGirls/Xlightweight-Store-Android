@@ -147,6 +147,7 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
     @Override
     public void removeKey(String key) {
         if (key == null) return;
+        if (!contains(key)) return;
         doCommit(preferences.edit().remove(encodeKeyIfNeeded(key)));
     }
 
@@ -227,10 +228,10 @@ public class TlSharedPreferences extends TlStoreBase implements TlStoreInterface
     }
 
     // do commit or apply
+    /// TODO ... commit() & apply() 都需要在IO失败的时机/没同步到文件的时机，来检查是否需要重试
     private void doCommit(SharedPreferences.Editor editor) {
         if (isAsyncApply) {
             editor.apply();
-            /// TODO ... 改为 apply() 并检查成功与否 且 重试
         } else {
             editor.commit();
         }
