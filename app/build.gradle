@@ -1,7 +1,11 @@
+// ----------- Gradle 8.0, Gradle Plugin 8.1.2 -----------
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+
+// ----------- Gradle 7.5, Gradle Plugin 7.4.2 -----------
+//apply plugin: 'com.android.application'
 
 android {
     namespace 'com.xpel.xlightweight_store_android'
@@ -30,19 +34,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
     buildFeatures {
         compose true
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.3'
-    }
-    packaging {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
     }
 }
 
@@ -56,6 +52,17 @@ dependencies {
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
+
+    // ----------- Gradle 7.5, Gradle Plugin 7.4.2 -----------
+    // fix: [Duplicate class in Kotlin Android] https://stackoverflow.com/a/75298544/1749293
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
 
     implementation project(path: ':module')  // debug the source
 }

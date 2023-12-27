@@ -1,9 +1,18 @@
+//buildscript {
+//    dependencies {
+//        classpath 'com.your.build:helper:1.0.0-SNAPSHOT'  // mavenLocal() // maven { \n allowInsecureProtocol = true \n url 'http://xxx.local' \n }
+//    }
+//}
+
 plugins {
     id 'com.android.library'
     id 'maven-publish'
 }
 
-// Just for publish to local. jitpack.io do not use the following configurations, it just user github user domain & git repository name & git tag informations
+//apply from: "${rootDir}/__YOUR_MODULE_PUBLISH__.gradle"
+
+// Just for publish to local.
+// jitpack.io do not use the following configurations, it just need github user domain & git repository name & git tag information
 afterEvaluate {
     publishing {
         publications {
@@ -52,8 +61,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
